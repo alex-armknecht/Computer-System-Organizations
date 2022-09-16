@@ -1,0 +1,530 @@
+Last login: Wed Dec  1 16:16:16 on ttys000
+alexandriaarmknecht@Alexandrias-MacBook-Pro ~ % cd Desktop/cmsi2210
+alexandriaarmknecht@Alexandrias-MacBook-Pro cmsi2210 % cd CMSI284-AnnaAlex
+alexandriaarmknecht@Alexandrias-MacBook-Pro CMSI284-AnnaAlex % cd homework
+alexandriaarmknecht@Alexandrias-MacBook-Pro homework % cd homework06
+alexandriaarmknecht@Alexandrias-MacBook-Pro homework06 % ls  
+findGCD.nasm	gcdFinder.c	makeNBO.nasm	makeNBOC.c	makeNBOCtest.c	paritygen.nasm	whichEndIsUp.c
+alexandriaarmknecht@Alexandrias-MacBook-Pro homework06 % nasm -fmacho64 findGCD.nasm 
+findGCD.nasm:9: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:10: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:14: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:16: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:17: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:18: error: comma, colon, decorator or end of line expected after operand
+alexandriaarmknecht@Alexandrias-MacBook-Pro homework06 % nasm -fmacho64 findGCD.nasm 
+findGCD.nasm:16: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:17: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:19: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:21: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:22: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:23: error: comma, colon, decorator or end of line expected after operand
+findGCD.nasm:27: error: comma, colon, decorator or end of line expected after operand
+alexandriaarmknecht@Alexandrias-MacBook-Pro homework06 % nasm -fmacho64 findGCD.nasm 
+alexandriaarmknecht@Alexandrias-MacBook-Pro homework06 % gcc findGCD.o -o findGCD
+Undefined symbols for architecture x86_64:
+  "_main", referenced from:
+     implicit entry/start for main executable
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+alexandriaarmknecht@Alexandrias-MacBook-Pro homework06 % nasm -fmacho64 findGCD.nasm 
+alexandriaarmknecht@Alexandrias-MacBook-Pro homework06 % gcc findGCD.o -o findGCD    
+alexandriaarmknecht@Alexandrias-MacBook-Pro homework06 % ./findGCD
+^C
+alexandriaarmknecht@Alexandrias-MacBook-Pro homework06 % lldb findGCD
+(lldb) target create "findGCD"
+Current executable set to '/Users/alexandriaarmknecht/Desktop/cmsi2210/CMSI284-AnnaAlex/homework/homework06/findGCD' (x86_64).
+(lldb) b begin 
+Breakpoint 1: 4 locations.
+(lldb) b gcd
+Breakpoint 2: where = findGCD`gcd, address = 0x0000000100003f63
+(lldb) b end
+Breakpoint 3: 2 locations.
+(lldb) r
+Process 55442 launched: '/Users/alexandriaarmknecht/Desktop/cmsi2210/CMSI284-AnnaAlex/homework/homework06/findGCD' (x86_64)
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x0000000100003f5d findGCD`begin
+findGCD`begin:
+->  0x100003f5d <+0>: xorq   %rax, %rax
+    0x100003f60 <+3>: xorq   %rcx, %rcx
+
+findGCD`gcd:
+    0x100003f63 <+0>: cqto   
+    0x100003f65 <+2>: movl   $0xb98d3efe, %eax         ; imm = 0xB98D3EFE 
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x0000000100003f5c  findGCD`main
+       rbx = 0x0000000000000000
+       rcx = 0x00007ffeefbffaa8
+       rdx = 0x00007ffeefbff9e8
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f5d  findGCD`begin
+    rflags = 0x0000000000000246
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si 
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f60 findGCD`begin + 3
+findGCD`begin:
+->  0x100003f60 <+3>: xorq   %rcx, %rcx
+
+findGCD`gcd:
+    0x100003f63 <+0>: cqto   
+    0x100003f65 <+2>: movl   $0xb98d3efe, %eax         ; imm = 0xB98D3EFE 
+    0x100003f6a <+7>: movl   $0xb08eed, %ecx           ; imm = 0xB08EED 
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x0000000000000000
+       rbx = 0x0000000000000000
+       rcx = 0x00007ffeefbffaa8
+       rdx = 0x00007ffeefbff9e8
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f60  findGCD`begin + 3
+    rflags = 0x0000000000000246
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+    frame #0: 0x0000000100003f63 findGCD`gcd
+findGCD`gcd:
+->  0x100003f63 <+0>:  cqto   
+    0x100003f65 <+2>:  movl   $0xb98d3efe, %eax         ; imm = 0xB98D3EFE 
+    0x100003f6a <+7>:  movl   $0xb08eed, %ecx           ; imm = 0xB08EED 
+    0x100003f6f <+12>: divq   %rcx
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x0000000000000000
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000000000
+       rdx = 0x00007ffeefbff9e8
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f63  findGCD`gcd
+    rflags = 0x0000000000000246
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f65 findGCD`gcd + 2
+findGCD`gcd:
+->  0x100003f65 <+2>:  movl   $0xb98d3efe, %eax         ; imm = 0xB98D3EFE 
+    0x100003f6a <+7>:  movl   $0xb08eed, %ecx           ; imm = 0xB08EED 
+    0x100003f6f <+12>: divq   %rcx
+    0x100003f72 <+15>: cmpq   $0x0, %rdx
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x0000000000000000
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000000000
+       rdx = 0x0000000000000000
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f65  findGCD`gcd + 2
+    rflags = 0x0000000000000246
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f6a findGCD`gcd + 7
+findGCD`gcd:
+->  0x100003f6a <+7>:  movl   $0xb08eed, %ecx           ; imm = 0xB08EED 
+    0x100003f6f <+12>: divq   %rcx
+    0x100003f72 <+15>: cmpq   $0x0, %rdx
+    0x100003f76 <+19>: je     0x100003f85               ; end
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x00000000b98d3efe
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000000000
+       rdx = 0x0000000000000000
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f6a  findGCD`gcd + 7
+    rflags = 0x0000000000000246
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f6f findGCD`gcd + 12
+findGCD`gcd:
+->  0x100003f6f <+12>: divq   %rcx
+    0x100003f72 <+15>: cmpq   $0x0, %rdx
+    0x100003f76 <+19>: je     0x100003f85               ; end
+    0x100003f78 <+21>: movq   %rcx, %rax
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x00000000b98d3efe
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000b08eed
+       rdx = 0x0000000000000000
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f6f  findGCD`gcd + 12
+    rflags = 0x0000000000000246
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f72 findGCD`gcd + 15
+findGCD`gcd:
+->  0x100003f72 <+15>: cmpq   $0x0, %rdx
+    0x100003f76 <+19>: je     0x100003f85               ; end
+    0x100003f78 <+21>: movq   %rcx, %rax
+    0x100003f7b <+24>: movq   %rdx, %rcx
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x000000000000010d
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000b08eed
+       rdx = 0x0000000000070ff5
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f72  findGCD`gcd + 15
+    rflags = 0x0000000000000246
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f76 findGCD`gcd + 19
+findGCD`gcd:
+->  0x100003f76 <+19>: je     0x100003f85               ; end
+    0x100003f78 <+21>: movq   %rcx, %rax
+    0x100003f7b <+24>: movq   %rdx, %rcx
+    0x100003f7e <+27>: movl   $0x0, %edx
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x000000000000010d
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000b08eed
+       rdx = 0x0000000000070ff5
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f76  findGCD`gcd + 19
+    rflags = 0x0000000000000206
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f78 findGCD`gcd + 21
+findGCD`gcd:
+->  0x100003f78 <+21>: movq   %rcx, %rax
+    0x100003f7b <+24>: movq   %rdx, %rcx
+    0x100003f7e <+27>: movl   $0x0, %edx
+    0x100003f83 <+32>: jmp    0x100003f63               ; <+0>
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x000000000000010d
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000b08eed
+       rdx = 0x0000000000070ff5
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f78  findGCD`gcd + 21
+    rflags = 0x0000000000000206
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f7b findGCD`gcd + 24
+findGCD`gcd:
+->  0x100003f7b <+24>: movq   %rdx, %rcx
+    0x100003f7e <+27>: movl   $0x0, %edx
+    0x100003f83 <+32>: jmp    0x100003f63               ; <+0>
+
+findGCD`end:
+    0x100003f85 <+0>:  movq   %rax, %rdi
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x0000000000b08eed
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000b08eed
+       rdx = 0x0000000000070ff5
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f7b  findGCD`gcd + 24
+    rflags = 0x0000000000000206
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f7e findGCD`gcd + 27
+findGCD`gcd:
+->  0x100003f7e <+27>: movl   $0x0, %edx
+    0x100003f83 <+32>: jmp    0x100003f63               ; <+0>
+
+findGCD`end:
+    0x100003f85 <+0>:  movq   %rax, %rdi
+    0x100003f88 <+3>:  leaq   0x4081(%rip), %rsi        ; output
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x0000000000b08eed
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000070ff5
+       rdx = 0x0000000000070ff5
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f7e  findGCD`gcd + 27
+    rflags = 0x0000000000000206
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f83 findGCD`gcd + 32
+findGCD`gcd:
+->  0x100003f83 <+32>: jmp    0x100003f63               ; <+0>
+
+findGCD`end:
+    0x100003f85 <+0>:  movq   %rax, %rdi
+    0x100003f88 <+3>:  leaq   0x4081(%rip), %rsi        ; output
+    0x100003f8f <+10>: callq  0x100003f96               ; symbol stub for: printf
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x0000000000b08eed
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000070ff5
+       rdx = 0x0000000000000000
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f83  findGCD`gcd + 32
+    rflags = 0x0000000000000206
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+    frame #0: 0x0000000100003f63 findGCD`gcd
+findGCD`gcd:
+->  0x100003f63 <+0>:  cqto   
+    0x100003f65 <+2>:  movl   $0xb98d3efe, %eax         ; imm = 0xB98D3EFE 
+    0x100003f6a <+7>:  movl   $0xb08eed, %ecx           ; imm = 0xB08EED 
+    0x100003f6f <+12>: divq   %rcx
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x0000000000b08eed
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000070ff5
+       rdx = 0x0000000000000000
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f63  findGCD`gcd
+    rflags = 0x0000000000000206
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) si
+Process 55442 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003f65 findGCD`gcd + 2
+findGCD`gcd:
+->  0x100003f65 <+2>:  movl   $0xb98d3efe, %eax         ; imm = 0xB98D3EFE 
+    0x100003f6a <+7>:  movl   $0xb08eed, %ecx           ; imm = 0xB08EED 
+    0x100003f6f <+12>: divq   %rcx
+    0x100003f72 <+15>: cmpq   $0x0, %rdx
+Target 0: (findGCD) stopped.
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x0000000000b08eed
+       rbx = 0x0000000000000000
+       rcx = 0x0000000000070ff5
+       rdx = 0x0000000000000000
+       rdi = 0x0000000000000001
+       rsi = 0x00007ffeefbff9d8
+       rbp = 0x00007ffeefbff9c8
+       rsp = 0x00007ffeefbff9b0
+        r8 = 0x0000000000000000
+        r9 = 0x0000000000000000
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000000
+       r12 = 0x0000000000000000
+       r13 = 0x0000000000000000
+       r14 = 0x0000000000000000
+       r15 = 0x0000000000000000
+       rip = 0x0000000100003f65  findGCD`gcd + 2
+    rflags = 0x0000000000000206
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) 
